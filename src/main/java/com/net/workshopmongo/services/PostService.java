@@ -1,5 +1,6 @@
 package com.net.workshopmongo.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,9 @@ public class PostService {
     public Post findById(String id) {
         Optional<Post> optional = repository.findById(id);
         return optional.orElseThrow(() -> new ObjectNotFoundException("Object not found"));
+    }
+
+    public List<Post> findByTitleContaining(String text) {
+        return repository.findByTitleContainingIgnoreCase(text);
     }
 }
